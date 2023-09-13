@@ -23,6 +23,14 @@ body {
     background-color: var(--dark-gray);
 }
 
+body {
+    padding: 90px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 80px);
@@ -32,6 +40,8 @@ body {
 
 .turn {
     background-color: green;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .square {
@@ -40,4 +50,8 @@ body {
 
 .score {
     background-color: blue;
+}
+
+.actions {
+    background-color: purple;
 }
