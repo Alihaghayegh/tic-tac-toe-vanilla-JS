@@ -1,8 +1,10 @@
 const App = {
   // All of HTML elements
   $: {
-    menu: document.querySelector(".menu"),
-    menuItem: document.querySelector(".items"),
+    menu: document.querySelector("[data-id='menu']"),
+    menuItem: document.querySelector("[data-id='menu-items']"),
+    resetBtn: document.querySelector("[data-id='reset-btn']"),
+    newRoundBtn: document.querySelector("[data-id='new-round-btn']"),
   },
 
   init() {
@@ -12,4 +14,4 @@ const App = {
   },
 };
 
-window.addEventListener('load', () => App.init())
+window.addEventListener('load', App.init)
