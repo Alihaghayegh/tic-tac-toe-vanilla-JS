@@ -35,9 +35,13 @@ const App = {
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
         console.log(`Square with id ${event.target.id}`);
-        console.log(` current player is ${App.state.currentPlayer}`)
+        console.log(` current player is ${App.state.currentPlayer}`);
 
-        const currentPlayer = App.$.currentPlayer
+        if (square.hasChildNodes()) {
+          return;
+        }
+
+        const currentPlayer = App.state.currentPlayer;
         const icon = document.createElement("i");
 
         if (currentPlayer === 1) {
@@ -46,9 +50,9 @@ const App = {
           icon.classList.add("fa-solid", "fa-o", "turquoise");
         }
 
-        App.state.currentPlayer = App.state.currentPlayer === 1 ? 2 :1
+        App.state.currentPlayer = App.state.currentPlayer === 1 ? 2 : 1;
 
-        event.target.replaceChildren(icon);
+        square.replaceChildren(icon);
       });
     });
   },
