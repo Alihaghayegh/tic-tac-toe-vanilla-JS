@@ -71,6 +71,11 @@ const App = {
       console.log("New Round");
     });
 
+    App.$.modalBtn.addEventListener("click", (event) => {
+      App.state.moves = [];
+      App.$.modal.classList.add("hidden");
+    });
+
     // TODO
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
