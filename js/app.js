@@ -35,7 +35,14 @@ const App = {
     // TODO
     App.$.squares.forEach((square) => {
       square.addEventListener("click", (event) => {
-        if (square.hasChildNodes()) {
+        const hasMove = (squareId) => {
+          const existingMove = App.state.moves.find(
+            (move) => move.squareId === squareId
+          );
+          return existingMove !== undefined;
+        };
+
+        if (hasMove(+square.id)) {
           return;
         }
 
