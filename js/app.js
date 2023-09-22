@@ -101,24 +101,29 @@ const App = {
 
         const nextPlayer = getOppositePlayer(currentPlayer);
 
-        const icon = document.createElement("i");
-        // const turnLabel = document.createElement("p");
-        // turnLabel.innerText = `Player ${nextPlayer}, you are up!`;
+        const squareIcon = document.createElement("i");
+        const turnIcon = document.createElement("i");
+        const turnLabel = document.createElement("p");
+        turnLabel.innerText = `Player ${nextPlayer}, you are up!`;
 
         if (currentPlayer === 1) {
-          icon.classList.add("fa-solid", "fa-x", "yellow");
+          squareIcon.classList.add("fa-solid", "fa-x", "yellow");
+          turnIcon.classList.add("fa-solid", "fa-o", "turquoise");
+          turnLabel.classList = 'turquoise'
         } else {
-          icon.classList.add("fa-solid", "fa-o", "turquoise");
+          squareIcon.classList.add("fa-solid", "fa-o", "turquoise");
+          turnIcon.classList.add("fa-solid", "fa-x", "yellow");
+          turnLabel.classList = 'yellow'
         }
 
-        // App.$.turn.replaceChildren(icon, turnLabel)
+        App.$.turn.replaceChildren(turnIcon, turnLabel)
 
         App.state.moves.push({
           squareId: +square.id,
           playerId: currentPlayer,
         });
 
-        square.replaceChildren(icon);
+        square.replaceChildren(squareIcon);
 
         // Check if there is a winner or tie game
         const game = App.getGameStatus(App.state.moves);
