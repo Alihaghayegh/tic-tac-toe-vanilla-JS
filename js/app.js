@@ -9,6 +9,7 @@ const App = {
     modal: document.querySelector("[data-id=modal]"),
     modalText: document.querySelector("[data-id=modal-text]"),
     modalBtn: document.querySelector("[data-id=modal-btn]"),
+    turn: document.querySelector("[data-id=turn]"),
   },
 
   state: {
@@ -73,6 +74,7 @@ const App = {
 
     App.$.modalBtn.addEventListener("click", (event) => {
       App.state.moves = [];
+      App.$.squares.forEach((square) => square.replaceChildren());
       App.$.modal.classList.add("hidden");
     });
 
@@ -97,13 +99,19 @@ const App = {
             ? 1
             : getOppositePlayer(lastMove.playerId);
 
+        const nextPlayer = getOppositePlayer(currentPlayer);
+
         const icon = document.createElement("i");
+        // const turnLabel = document.createElement("p");
+        // turnLabel.innerText = `Player ${nextPlayer}, you are up!`;
 
         if (currentPlayer === 1) {
           icon.classList.add("fa-solid", "fa-x", "yellow");
         } else {
           icon.classList.add("fa-solid", "fa-o", "turquoise");
         }
+
+        // App.$.turn.replaceChildren(icon, turnLabel)
 
         App.state.moves.push({
           squareId: +square.id,
