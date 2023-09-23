@@ -11,5 +11,24 @@ export default class View {
     this.$.modalText = document.querySelector("[data-id=modal-text]");
     this.$.modalBtn = document.querySelector("[data-id=modal-btn]");
     this.$.turn = document.querySelector("[data-id=turn]");
+
+    // UI-only Event listeners
+    this.$.menuItem.addEventListener("click", (event) => {
+      this.$.menuItem.classList.toggle("hidden");
+    });
+  }
+
+  bindGameResetEvent(handler) {
+    this.$.resetBtn.addEventListener("click", handler);
+  }
+
+  bindNewRoundEvent(handler) {
+    this.$.newRoundBtn.addEventListener("click", handler);
+  }
+
+  bindPlayerMoveEvent(handler) {
+    this.$.squares.forEach((square) => {
+      square.addEventListener("click", handler);
+    });
   }
 }
