@@ -60,10 +60,10 @@ export default class View {
   }
 
   #qsAll(selector) {
-    const el = document.querySelectorall(selector);
+    const elList = document.querySelectorall(selector);
 
-    if (!el) throw new Error("Could not find Elements");
+    if (!elList) throw new Error("Could not find Elements");
 
-    return el;
+    return elList;
   }
 }
