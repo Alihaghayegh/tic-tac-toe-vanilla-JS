@@ -13,7 +13,7 @@ export default class View {
     this.$.turn = document.querySelector("[data-id=turn]");
 
     // UI-only Event listeners
-    this.$.menuItem.addEventListener("click", (event) => {
+    this.$.menu.addEventListener("click", (event) => {
       this.$.menuItem.classList.toggle("hidden");
     });
   }
