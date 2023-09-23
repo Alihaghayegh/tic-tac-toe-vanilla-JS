@@ -3,6 +3,7 @@ export default class View {
 
   constructor() {
     this.$.menu = document.querySelector("[data-id='menu']");
+    this.$.menuBtn = document.querySelector("[data-id='menu-btn']");
     this.$.menuItem = document.querySelector("[data-id='menu-items']");
     this.$.resetBtn = document.querySelector("[data-id='reset-btn']");
     this.$.newRoundBtn = document.querySelector("[data-id='new-round-btn']");
@@ -13,10 +14,14 @@ export default class View {
     this.$.turn = document.querySelector("[data-id=turn]");
 
     // UI-only Event listeners
-    this.$.menu.addEventListener("click", (event) => {
-      this.$.menuItem.classList.toggle("hidden");
+    this.$.menuBtn.addEventListener("click", (event) => {
+      this.toggleMenu();
     });
   }
+
+  /**
+   * Register all the event listeners
+   */
 
   bindGameResetEvent(handler) {
     this.$.resetBtn.addEventListener("click", handler);
@@ -30,5 +35,17 @@ export default class View {
     this.$.squares.forEach((square) => {
       square.addEventListener("click", handler);
     });
+  }
+
+  /**
+   * DOM helper methods
+   */
+  toggleMenu() {
+    this.$.menuItem.classList.toggle("hidden");
+    this.$.menuBtn.classList.toggle("border");
+
+    const icon = this.$.menuBtn.querySelector("i");
+    icon.classList.toggle("fa-chevron-down");
+    icon.classList.toggle("fa-chevron-up");
   }
 }
