@@ -34,7 +34,7 @@ export default class View {
   }
 
   bindPlayerMoveEvent(handler) {
-    this.$.squares.forEach((square) => {
+    this.$$.squares.forEach((square) => {
       square.addEventListener("click", handler);
     });
   }
@@ -51,7 +51,7 @@ export default class View {
     icon.classList.toggle("fa-chevron-up");
   }
 
-  #qs(selector) {
+  #qs(selector, parent) {
     const el = parent
       ? parent.querySelector(selector)
       : document.querySelector(selector);
@@ -62,7 +62,7 @@ export default class View {
   }
 
   #qsAll(selector) {
-    const elList = document.querySelectorall(selector);
+    const elList = document.querySelectorAll(selector);
 
     if (!elList) throw new Error("Could not find Elements");
 
