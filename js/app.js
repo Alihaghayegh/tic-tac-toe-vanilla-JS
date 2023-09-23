@@ -165,8 +165,6 @@ function init() {
     console.log("Player Move Event");
     console.log(event);
   });
-
-  console.log(view.$.turn);
 }
 
 window.addEventListener("load", init);
