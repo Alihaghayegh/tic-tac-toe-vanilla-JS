@@ -7,6 +7,10 @@ export default class Store {
 
   constructor() {}
 
+  get game() {
+    return 'dummy value'
+  }
+
   #getState() {
     return this.#state;
   }
