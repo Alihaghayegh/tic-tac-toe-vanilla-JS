@@ -12,7 +12,7 @@ export default class View {
     this.$.modalText = this.#qs("[data-id=modal-text]");
     this.$.modalBtn = this.#qs("[data-id=modal-btn]");
     this.$.turn = this.#qs("[data-id=turn]");
-    
+
     this.$$.squares = this.#qsAll("[data-id=square]");
 
     // UI-only Event listeners
@@ -49,6 +49,33 @@ export default class View {
     const icon = this.$.menuBtn.querySelector("i");
     icon.classList.toggle("fa-chevron-down");
     icon.classList.toggle("fa-chevron-up");
+  }
+
+  handlePlayerMove(squareEl, player) {
+    const icon = document.createElement("i");
+    icon.classList.add(
+      "fa-solid",
+      player === 1 ? "fa-x" : "fa-o",
+      player === 1 ? "yellow" : "turqouise"
+    );
+    squareEl.replaceChildren(icon);
+  }
+
+  // hard coding something and filling up later
+  // Player = 1 | 2
+  setTurnIndicator(Player) {
+    const icon = document.createElement("i");
+    const label = document.createElement("p");
+
+    this.$.turn.classList.add(Player === 1 ? "yellow" : "turquoise");
+    this.$.turn.classList.remove(Player === 1 ? "turquoise" : "yellow");
+
+    icon.classList.add("fa-solid", Player === 1 ? "fa-x" : "fa-o");
+
+    label.innerText =
+      Player === 1 ? "Player 1, you are up!" : "Player 2, you are up!";
+
+    this.$.turn.replaceChildren(icon, label);
   }
 
   #qs(selector, parent) {

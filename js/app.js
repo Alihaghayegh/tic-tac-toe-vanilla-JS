@@ -161,9 +161,10 @@ function init() {
     console.log(event);
   });
 
+  // for now we will hard code it
   view.bindPlayerMoveEvent((event) => {
-    console.log("Player Move Event");
-    console.log(event);
+    view.setTurnIndicator(2);
+    view.handlePlayerMove(event.target, 1);
   });
 }
 
