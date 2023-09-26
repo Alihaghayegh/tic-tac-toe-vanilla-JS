@@ -172,8 +172,10 @@ function init() {
   console.log(store.game);
 
   view.bindGameResetEvent((event) => {
-    console.log("Reset event");
-    console.log(event);
+    view.closeModal();
+    store.reset();
+    view.clearMoves();
+    view.setTurnIndicator(store.game.currentPlayer);
   });
 
   view.bindNewRoundEvent((event) => {
@@ -198,7 +200,9 @@ function init() {
 
     if (store.game.status.isComplete) {
       view.openModal(
-        store.game.winner ? `${store.game.status.winner.name} wins!` : "Tie!"
+        store.game.status.winner
+          ? `${store.game.status.winner.name} wins!`
+          : "Tie!"
       );
       return;
     }

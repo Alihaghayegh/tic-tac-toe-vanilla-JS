@@ -62,6 +62,10 @@ export default class Store {
     this.#saveState(stateClone);
   }
 
+  reset() {
+    this.#saveState(initalValue)
+  }
+
   #getState() {
     return this.#state;
   }
