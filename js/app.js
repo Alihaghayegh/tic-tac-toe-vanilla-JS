@@ -167,7 +167,7 @@ const players = [
 
 function init() {
   const view = new View();
-  const store = new Store();
+  const store = new Store(players);
 
   console.log(store.game);
 
@@ -181,10 +181,17 @@ function init() {
     console.log(event);
   });
 
-  // for now we will hard code it
   view.bindPlayerMoveEvent((event) => {
-    view.setTurnIndicator(players[1]);
-    view.handlePlayerMove(event.target, players[1]);
+    const clickedSquare = event.target;
+
+    // Place an icon of the current player in a square
+    view.handlePlayerMove(clickedSquare, store.game.currentPlayer);
+
+    // Advance to the next state by pushing a move to the moves array
+    store.playeMove(+clickedSquare.id)
+
+    // Set the next player's turn indicator
+    view.setTurnIndicator(store.game.currentPlayer);
   });
 }
 
