@@ -24,6 +24,30 @@ export default class View {
     });
   }
 
+  render(game, stats) {
+    const { playerWithStats, ties } = stats;
+    const {
+      moves,
+      currentPlayer,
+      status: { isComplete, winner },
+    } = game;
+
+    this.#closeAll();
+    this.#clearMoves();
+    this.#updateScoreboard(
+      playerWithStats[0].wins,
+      playerWithStats[1].wins,
+      ties
+    );
+    this.#initializeMoves(moves);
+
+    if (isComplete) {
+      this.#openModal(winner ? `${winner.name} wins!` : "Tie!");
+      return;
+    }
+    this.#setTurnIndicator(currentPlayer);
+  }
+
   /**
    * Register all the event listeners
    */
@@ -47,34 +71,34 @@ export default class View {
    * DOM helper methods
    */
 
-  updateScoreboard(p1Wins, p2Wins, ties) {
+  #updateScoreboard(p1Wins, p2Wins, ties) {
     this.$.p1Wins.innerText = `${p1Wins} wins`;
     this.$.p2Wins.innerText = `${p2Wins} wins`;
     this.$.ties.innerText = `${ties} ties`;
   }
 
-  openModal(message) {
+  #openModal(message) {
     this.$.modal.classList.remove("hidden");
     this.$.modalText.innerText = message;
   }
 
-  closeAll() {
+  #closeAll() {
     this.#closeModal();
     this.#closeMenu();
   }
 
-  clearMoves() {
+  #clearMoves() {
     this.$$.squares.forEach((square) => {
       square.replaceChildren();
     });
   }
 
-  initializeMoves(moves) {
+  #initializeMoves(moves) {
     this.$$.squares.forEach((square) => {
       const existingMove = moves.find((move) => move.squareId === +square.id);
 
       if (existingMove) {
-        this.handlePlayerMove(square, existingMove.player);
+        this.#handlePlayerMove(square, existingMove.player);
       }
     });
   }
@@ -100,14 +124,14 @@ export default class View {
     icon.classList.toggle("fa-chevron-up");
   }
 
-  handlePlayerMove(squareEl, player) {
+  #handlePlayerMove(squareEl, player) {
     const icon = document.createElement("i");
     icon.classList.add("fa-solid", player.iconClass, player.colorClass);
     squareEl.replaceChildren(icon);
   }
 
   // Player = 1 | 2
-  setTurnIndicator(player) {
+  #setTurnIndicator(player) {
     const icon = document.createElement("i");
     const label = document.createElement("p");
 

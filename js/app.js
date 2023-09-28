@@ -171,34 +171,35 @@ function init() {
 
   console.log(store.game);
 
-  function initView() {
-    view.closeAll();
-    view.clearMoves();
-    view.setTurnIndicator(store.game.currentPlayer);
+  // function initView() {
+  //   view.closeAll();
+  //   view.clearMoves();
+  //   view.setTurnIndicator(store.game.currentPlayer);
 
-    view.updateScoreboard(
-      store.stats.playerWithStats[0].wins,
-      store.stats.playerWithStats[1].wins,
-      store.stats.ties
-    );
-    view.initializeMoves(store.game.moves);
-  }
+  //   view.updateScoreboard(
+  //     store.stats.playerWithStats[0].wins,
+  //     store.stats.playerWithStats[1].wins,
+  //     store.stats.ties
+  //   );
+  //   view.initializeMoves(store.game.moves);
+  // }
 
   window.addEventListener("storage", () => {
     console.log("State changed from another tab");
-    initView();
+    view.render(store.game, store.stats);
   });
 
-  initView();
+  // initView();
+  view.render(store.game, store.stats);
 
   view.bindGameResetEvent((event) => {
     store.reset();
-    initView();
+    view.render(store.game, store.stats);
   });
 
   view.bindNewRoundEvent((event) => {
     store.newRound();
-    initView();
+    view.render(store.game, store.stats);
   });
 
   view.bindPlayerMoveEvent((square) => {
@@ -211,22 +212,24 @@ function init() {
     }
 
     // Place an icon of the current player in a square
-    view.handlePlayerMove(square, store.game.currentPlayer);
+    // view.handlePlayerMove(square, store.game.currentPlayer);
 
     // Advance to the next state by pushing a move to the moves array
     store.playeMove(+square.id);
 
-    if (store.game.status.isComplete) {
-      view.openModal(
-        store.game.status.winner
-          ? `${store.game.status.winner.name} wins!`
-          : "Tie!"
-      );
-      return;
-    }
+    // if (store.game.status.isComplete) {
+    //   view.openModal(
+    //     store.game.status.winner
+    //       ? `${store.game.status.winner.name} wins!`
+    //       : "Tie!"
+    //   );
+    //   return;
+    // }
 
-    // Set the next player's turn indicator
-    view.setTurnIndicator(store.game.currentPlayer);
+    // // Set the next player's turn indicator
+    // view.setTurnIndicator(store.game.currentPlayer);
+
+    view.render(store.game, store.stats);
   });
 }
 
